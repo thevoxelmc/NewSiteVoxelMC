@@ -1,345 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VoxelMC | Vanilla+ Economy SMP</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoxelMC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #050816;
+      background: #0b1120;
       color: white;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background:
-        radial-gradient(circle at top left, rgba(91, 33, 182, 0.35), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.25), transparent 35%);
-      z-index: -1;
+      line-height: 1.6;
     }
 
     nav {
-      position: fixed;
-      top: 0;
       width: 100%;
-      padding: 18px 8%;
+      padding: 20px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      backdrop-filter: blur(12px);
-      background: rgba(5, 8, 22, 0.65);
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      z-index: 999;
+      background: #0f172a;
+      position: sticky;
+      top: 0;
     }
 
     .logo {
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       font-weight: 800;
-      background: linear-gradient(90deg, #60a5fa, #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #93c5fd;
     }
 
     .nav-links {
       display: flex;
-      gap: 30px;
+      gap: 24px;
     }
 
     .nav-links a {
-      color: #d1d5db;
+      color: #cbd5e1;
       text-decoration: none;
-      transition: 0.25s ease;
       font-weight: 500;
+      transition: .2s;
     }
 
     .nav-links a:hover {
       color: white;
     }
 
-    section {
-      padding: 120px 8%;
-    }
-
     .hero {
-      min-height: 100vh;
-      display: flex;
+      padding: 120px 8%;
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 60px;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero-content {
-      max-width: 900px;
     }
 
     .hero h1 {
-      font-size: 5rem;
-      line-height: 1;
-      margin-bottom: 25px;
-      background: linear-gradient(90deg, #60a5fa, #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 4.5rem;
+      margin-bottom: 20px;
     }
 
     .hero p {
-      font-size: 1.25rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin-bottom: 40px;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+      max-width: 650px;
     }
 
     .buttons {
       display: flex;
-      gap: 20px;
-      justify-content: center;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 16px 32px;
-      border-radius: 14px;
+      padding: 14px 24px;
+      border-radius: 12px;
       text-decoration: none;
-      font-weight: 700;
-      transition: 0.3s ease;
-      border: 1px solid rgba(255,255,255,0.1);
+      font-weight: 600;
+      transition: .2s;
     }
 
-    .btn-primary {
-      background: linear-gradient(90deg, #3b82f6, #9333ea);
+    .primary {
+      background: #2563eb;
       color: white;
-      box-shadow: 0 0 25px rgba(147, 51, 234, 0.35);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-4px);
+    .primary:hover {
+      background: #1d4ed8;
     }
 
-    .btn-secondary {
-      background: rgba(255,255,255,0.05);
+    .secondary {
+      background: #1e293b;
       color: white;
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.1);
-    }
-
-    .server-box {
-      margin-top: 45px;
-      background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
-      padding: 20px;
+    }
+
+    .secondary:hover {
+      background: #273449;
+    }
+
+    .side-card {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
+      padding: 30px;
     }
 
-    .server-ip {
-      font-size: 1.15rem;
-      font-weight: 700;
+    .side-card h3 {
+      margin-bottom: 18px;
+    }
+
+    .ip-box {
+      background: #0f172a;
+      padding: 18px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .ip {
       color: #93c5fd;
+      font-weight: 700;
+      margin-top: 6px;
     }
 
-    .copy-btn {
-      padding: 10px 20px;
+    button {
+      width: 100%;
+      padding: 14px;
       border: none;
       border-radius: 12px;
-      cursor: pointer;
-      background: linear-gradient(90deg, #2563eb, #7e22ce);
+      background: #7c3aed;
       color: white;
       font-weight: 700;
+      cursor: pointer;
     }
 
-    .section-title {
-      font-size: 3rem;
-      margin-bottom: 18px;
-      text-align: center;
+    button:hover {
+      background: #6d28d9;
     }
 
-    .section-subtitle {
-      text-align: center;
-      color: #94a3b8;
-      max-width: 700px;
-      margin: auto auto 60px auto;
-      line-height: 1.7;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: 30px;
-      transition: 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(96,165,250,0.35);
-    }
-
-    .card h3 {
-      margin-bottom: 16px;
-      font-size: 1.35rem;
-      color: #c4b5fd;
-    }
-
-    .card p {
-      color: #cbd5e1;
-      line-height: 1.7;
-    }
-
-    .how-to-join {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .step {
-      background: rgba(255,255,255,0.05);
-      border-radius: 24px;
-      padding: 35px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .step span {
-      font-size: 3rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, #60a5fa, #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .step h3 {
-      margin: 18px 0;
-      font-size: 1.5rem;
-    }
-
-    .rules-list {
-      max-width: 900px;
+    .page-grid {
+      padding: 0 8% 100px;
+      max-width: 1200px;
       margin: auto;
       display: grid;
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
     }
 
-    .rule {
-      background: rgba(255,255,255,0.05);
-      padding: 22px 28px;
+    .page-card {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.08);
+      padding: 28px;
     }
 
-    .staff-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-
-    .staff-card {
-      background: rgba(255,255,255,0.05);
-      border-radius: 24px;
-      padding: 35px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .staff-card h3 {
-      margin-top: 20px;
+    .page-card h2 {
+      margin-bottom: 14px;
       font-size: 1.4rem;
     }
 
-    .staff-card p {
+    .page-card p {
       color: #94a3b8;
-      margin-top: 10px;
+      margin-bottom: 24px;
     }
 
-    .avatar {
-      width: 90px;
-      height: 90px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #3b82f6, #9333ea);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 800;
-      margin: auto;
+    .page-link {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .95rem;
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: #0f172a;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: .2s;
     }
 
-    .discord-box {
-      text-align: center;
-      background: rgba(255,255,255,0.05);
-      padding: 60px;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,0.08);
+    .page-link:hover {
+      background: #172033;
     }
 
     footer {
-      padding: 40px;
+      padding: 35px;
       text-align: center;
-      color: #94a3b8;
       border-top: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 20px;
-      padding: 10px 20px;
-      border-radius: 999px;
-      background: rgba(34,197,94,0.12);
-      border: 1px solid rgba(34,197,94,0.2);
-      color: #86efac;
-      font-weight: 600;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 12px #22c55e;
+      color: #64748b;
     }
 
     @media(max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
       .hero h1 {
-        font-size: 3.5rem;
+        font-size: 3rem;
       }
 
       .nav-links {
         display: none;
-      }
-
-      section {
-        padding: 100px 6%;
       }
     }
   </style>
@@ -350,195 +221,92 @@
     <div class="logo">VoxelMC</div>
 
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#join">Join</a>
-      <a href="#rules">Rules</a>
-      <a href="#staff">Staff</a>
-      <a href="#discord">Discord</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="join.html">Join</a>
+      <a href="rules.html">Rules</a>
+      <a href="staff.html">Staff</a>
     </div>
   </nav>
 
   <section class="hero">
-    <div class="hero-content">
+    <div>
       <h1>VoxelMC</h1>
 
       <p>
         A modern Vanilla+ Economy SMP focused on fun gameplay without the
-        pay-to-win aspect found on most Minecraft servers.
+        pay-to-win experience found on most Minecraft servers.
       </p>
 
       <div class="buttons">
-        <a href="#join" class="btn btn-primary">Start Playing</a>
-        <a href="#discord" class="btn btn-secondary">Join Discord</a>
-      </div>
-
-      <div class="server-box">
-        <div>
-          <div style="font-size: .9rem; color: #94a3b8; margin-bottom: 6px;">SERVER IP</div>
-          <div class="server-ip" id="serverIP">MC.PlayVoxel.Net</div>
-        </div>
-
-        <button class="copy-btn" onclick="copyIP()">Copy IP</button>
-      </div>
-
-      <div class="status">
-        <div class="dot"></div>
-        Java Edition Only • Bedrock Support Coming Soon
+        <a href="join.html" class="btn primary">How To Join</a>
+        <a href="#" class="btn secondary">Discord</a>
       </div>
     </div>
-  </section>
 
-  <section id="about">
-    <h2 class="section-title">About VoxelMC</h2>
+    <div class="side-card">
+      <h3>Server Information</h3>
 
-    <p class="section-subtitle">
-      VoxelMC is a community-focused SMP built for players who want a fun,
-      balanced, and engaging Minecraft experience without unfair advantages.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <h3>Vanilla+ Gameplay</h3>
-        <p>
-          Enjoy Minecraft with quality-of-life improvements while keeping the
-          core survival feeling intact.
-        </p>
+      <div class="ip-box">
+        <div>Server IP</div>
+        <div class="ip">MC.PlayVoxel.Net</div>
       </div>
 
-      <div class="card">
-        <h3>Balanced Economy</h3>
-        <p>
-          Build wealth, trade with players, and grow your empire in a fair
-          player-driven economy.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>No Pay-To-Win</h3>
-        <p>
-          We believe skill, creativity, and community should matter more than
-          spending money.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Growing Community</h3>
-        <p>
-          Join early and become part of the foundation of an exciting new SMP
-          community.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="join">
-    <h2 class="section-title">How To Join</h2>
-
-    <p class="section-subtitle">
-      Getting started on VoxelMC only takes a few minutes.
-    </p>
-
-    <div class="how-to-join">
-      <div class="step">
-        <span>1</span>
-        <h3>Launch Minecraft Java Edition</h3>
-        <p>
-          Open Minecraft Java Edition and make sure you are using the supported
-          version of the server.
-        </p>
-      </div>
-
-      <div class="step">
-        <span>2</span>
-        <h3>Add The Server</h3>
-        <p>
-          Go to Multiplayer → Add Server and enter the server IP:
-          <strong>MC.PlayVoxel.Net</strong>
-        </p>
-      </div>
-
-      <div class="step">
-        <span>3</span>
-        <h3>Start Your Adventure</h3>
-        <p>
-          Join the server, meet the community, build your base, and enjoy the
-          VoxelMC experience.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="rules">
-    <h2 class="section-title">Server Rules</h2>
-
-    <p class="section-subtitle">
-      Keep the community fun, fair, and enjoyable for everyone.
-    </p>
-
-    <div class="rules-list">
-      <div class="rule">Be respectful to all players and staff members.</div>
-      <div class="rule">No cheating, hacks, x-ray, or unfair modifications.</div>
-      <div class="rule">No griefing or stealing from other players.</div>
-      <div class="rule">Keep chat friendly and appropriate.</div>
-      <div class="rule">Use common sense and help keep the community positive.</div>
-    </div>
-  </section>
-
-  <section id="staff">
-    <h2 class="section-title">Meet The Owners</h2>
-
-    <p class="section-subtitle">
-      The team behind VoxelMC.
-    </p>
-
-    <div class="staff-grid">
-      <div class="staff-card">
-        <div class="avatar">T</div>
-        <h3>ThyIr0n</h3>
-        <p>Owner</p>
-      </div>
-
-      <div class="staff-card">
-        <div class="avatar">W</div>
-        <h3>Wolfwins200</h3>
-        <p>Owner</p>
-      </div>
-
-      <div class="staff-card">
-        <div class="avatar">R</div>
-        <h3>Ravikxx_</h3>
-        <p>Owner</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="discord">
-    <div class="discord-box">
-      <h2 class="section-title">Join Our Discord</h2>
-
-      <p class="section-subtitle">
-        Stay updated with announcements, chat with the community, and get help
-        from staff.
+      <p style="color:#94a3b8; margin-bottom:20px;">
+        Java Edition Only<br>
+        Bedrock Support Coming Soon
       </p>
 
-      <a href="#" class="btn btn-primary">Join Discord</a>
+      <button onclick="copyIP()">Copy IP</button>
+    </div>
+  </section>
+
+  <section class="page-grid">
+    <div class="page-card">
+      <h2>About The Server</h2>
+      <p>
+        Learn about VoxelMC, our gameplay style, and what makes the server unique.
+      </p>
+
+      <a class="page-link" href="about.html">Open Page →</a>
+    </div>
+
+    <div class="page-card">
+      <h2>How To Join</h2>
+      <p>
+        Simple instructions for joining the server and starting your adventure.
+      </p>
+
+      <a class="page-link" href="join.html">Open Page →</a>
+    </div>
+
+    <div class="page-card">
+      <h2>Rules</h2>
+      <p>
+        Keep the community fun and fair by following the server guidelines.
+      </p>
+
+      <a class="page-link" href="rules.html">Open Page →</a>
+    </div>
+
+    <div class="page-card">
+      <h2>Staff Team</h2>
+      <p>
+        Meet the owners and staff members behind VoxelMC.
+      </p>
+
+      <a class="page-link" href="staff.html">Open Page →</a>
     </div>
   </section>
 
   <footer>
-    © 2026 VoxelMC • Vanilla+ Economy SMP • Built For The Community
+    © 2026 VoxelMC • Vanilla+ Economy SMP
   </footer>
 
   <script>
     function copyIP() {
       navigator.clipboard.writeText('MC.PlayVoxel.Net');
-
-      const button = document.querySelector('.copy-btn');
-      button.innerText = 'Copied!';
-
-      setTimeout(() => {
-        button.innerText = 'Copy IP';
-      }, 2000);
+      alert('Server IP copied!');
     }
   </script>
 
